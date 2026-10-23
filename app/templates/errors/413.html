@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% block title %}File too large · PyCareer{% endblock %}{% block content %}
+<div class="error-state">
+    <div class="error-code">413</div>
+    <h1 class="h3">File too large</h1>
+    <p class="text-secondary">The uploaded file exceeds the allowed size.</p><a class="btn btn-primary"
+                                                                                href="{{ url_for('main.index') }}">Return
+    home</a></div>{% endblock %}

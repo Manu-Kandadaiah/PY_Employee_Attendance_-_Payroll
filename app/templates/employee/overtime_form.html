@@ -1,0 +1,14 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import field %}{% block title %}Request Overtime · PyCareer{% endblock %}{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card panel-card">
+            <div class="card-body p-4"><h1 class="h4">Request overtime approval</h1>
+                <p class="text-secondary">{{ record.attendance_date.strftime('%d %B %Y') }} · Calculated overtime {{
+                    '%.2f'|format(record.overtime_minutes/60) }} hours</p>
+                <form method="post">{{ form.hidden_tag() }}{{ field(form.reason) }}{{ form.submit(class='btn
+                    btn-primary') }} <a href="{{ url_for('employee.attendance') }}" class="btn btn-light">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>{% endblock %}

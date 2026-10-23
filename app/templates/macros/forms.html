@@ -1,0 +1,34 @@
+{% macro field(field, class_='form-control', help='') %}
+<div class="mb-3">
+    {{ field.label(class='form-label fw-semibold') }}
+    {{ field(class=class_ + (' is-invalid' if field.errors else '')) }}
+    {% if help %}
+    <div class="form-text">{{ help }}</div>
+    {% endif %}
+    {% for error in field.errors %}
+    <div class="invalid-feedback">{{ error }}</div>
+    {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro checkbox(field) %}
+<div class="form-check mb-3">{{ field(class='form-check-input') }} {{ field.label(class='form-check-label') }}{% for
+    error in field.errors %}
+    <div class="text-danger small">{{ error }}</div>
+    {% endfor %}
+</div>
+{% endmacro %}
+
+{% macro page_header(title, subtitle='') %}
+<div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
+    <div><h1 class="h3 mb-1">{{ title }}</h1>{% if subtitle %}<p class="text-secondary mb-0">{{ subtitle }}</p>{% endif
+        %}
+    </div>
+    {{ caller() if caller else '' }}
+</div>
+{% endmacro %}
+
+{% macro badge(status) %}
+{% set map={'active':'success','present':'success','approved':'success','paid':'success','processed':'primary','generated':'primary','late':'warning','pending':'warning','probation':'info','notice':'warning','half_day':'info','rejected':'danger','inactive':'secondary','absent':'danger','cancelled':'secondary','draft':'secondary'} %}
+<span class="badge text-bg-{{ map.get(status, 'secondary') }} text-capitalize">{{ status.replace('_',' ') }}</span>
+{% endmacro %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}PyCareer — Attendance & Payroll{% endblock %}
+{% block content %}
+<section class="hero-panel overflow-hidden">
+  <div class="row align-items-center g-5">
+    <div class="col-lg-7 p-lg-5 p-4">
+      <span class="eyebrow">Workforce operations, simplified</span>
+      <h1 class="display-4 fw-bold mt-3">Attendance, leave, shifts and payroll in one secure platform.</h1>
+      <p class="lead text-secondary mt-3">A role-based employee management system for administrators, HR teams, managers and employees—built with Flask, SQLAlchemy and SQLite.</p>
+      <div class="d-flex flex-wrap gap-3 mt-4"><a class="btn btn-primary btn-lg px-4" href="{{ url_for('auth.login') }}">Open workspace</a><a class="btn btn-outline-secondary btn-lg px-4" href="#features">Explore features</a></div>
+    </div>
+    <div class="col-lg-5 p-4 p-lg-5"><div class="hero-visual"><i class="bi bi-bar-chart-line"></i><div class="floating-card card-one"><strong>200</strong><span>Fictional employees</span></div><div class="floating-card card-two"><strong>8</strong><span>Departments</span></div></div></div>
+  </div>
+</section>
+<section id="features" class="py-5"><div class="row g-4">{% for icon,title,text in [('bi-fingerprint','Smart attendance','Daily check-in/check-out with shift-aware late, half-day and overtime calculations.'),('bi-calendar2-check','Leave & scheduling','Leave balances, approval workflows, holidays and effective-dated shift assignments.'),('bi-cash-stack','Payroll automation','Prorated earnings, statutory deductions, overtime, payroll approvals and PDF payslips.'),('bi-shield-check','Enterprise controls','Role-based access, CSRF protection, audit logging, validation and secure password hashing.')] %}<div class="col-md-6 col-xl-3"><div class="feature-card h-100"><i class="bi {{ icon }}"></i><h3 class="h5 mt-3">{{ title }}</h3><p class="text-secondary mb-0">{{ text }}</p></div></div>{% endfor %}</div></section>
+{% endblock %}

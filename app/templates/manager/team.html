@@ -1,0 +1,40 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import badge %}{% block title %}Team Directory · PyCareer{% endblock %}{% block content %}
+<div class="mb-4"><h1 class="h3 mb-1">Team directory</h1>
+    <p class="text-secondary">Employees within your reporting scope.</p></div>
+<div class="card panel-card">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+            <tr>
+                <th>Employee</th>
+                <th>Department</th>
+                <th>Designation</th>
+                <th>Manager</th>
+                <th>Joined</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>{% for e in employees %}
+            <tr>
+                <td>
+                    <div class="d-flex align-items-center gap-2"><span class="avatar-sm bg-primary-subtle text-primary">{{ e.display_name[:1] }}</span>
+                        <div><strong>{{ e.display_name }}</strong>
+                            <div class="small text-secondary">{{ e.employee_code }} · {{ e.user.email }}</div>
+                        </div>
+                    </div>
+                </td>
+                <td>{{ e.department.name }}</td>
+                <td>{{ e.designation }}</td>
+                <td>{{ e.manager.display_name if e.manager else '—' }}</td>
+                <td>{{ e.date_of_joining.strftime('%d %b %Y') }}</td>
+                <td>{{ badge(e.status) }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center py-5 text-secondary">No employees in your scope.</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>{% endblock %}

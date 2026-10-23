@@ -1,0 +1,61 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import field,checkbox %}{% block title %}Holiday Calendar · PyCareer{% endblock %}{% block content %}
+<div class="mb-4"><h1 class="h3 mb-1">Holiday calendar</h1>
+    <p class="text-secondary">Organization-wide holidays used in attendance and payroll calculations.</p></div>
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card panel-card">
+            <div class="card-body"><h2 class="h5">Add holiday</h2>
+                <form method="post">{{ form.hidden_tag() }}{{ field(form.holiday_date) }}{{ field(form.name) }}{{
+                    field(form.description) }}{{ checkbox(form.is_optional) }}{{ form.submit(class='btn btn-primary
+                    w-100') }}
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="card panel-card">
+            <div class="card-header bg-white">
+                <form class="d-flex gap-2 align-items-center"><label class="fw-semibold">Year</label><input
+                        class="form-control w-auto" type="number" name="year" value="{{ year }}">
+                    <button class="btn btn-outline-primary">View</button>
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Holiday</th>
+                        <th>Type</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>{% for h in holidays %}
+                    <tr>
+                        <td><strong>{{ h.holiday_date.strftime('%d %b %Y') }}</strong>
+                            <div class="small text-secondary">{{ h.holiday_date.strftime('%A') }}</div>
+                        </td>
+                        <td>{{ h.name }}
+                            <div class="small text-secondary">{{ h.description or '' }}</div>
+                        </td>
+                        <td><span class="badge text-bg-{{ 'info' if h.is_optional else 'primary' }}">{{ 'Optional' if h.is_optional else 'Mandatory' }}</span>
+                        </td>
+                        <td>
+                            <form method="post" action="{{ url_for('hr.holiday_delete', holiday_id=h.id) }}"
+                                  onsubmit="return confirm('Delete holiday?')"><input type="hidden" name="csrf_token"
+                                                                                      value="{{ csrf_token() }}">
+                                <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center py-5 text-secondary">No holidays for this year.</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>{% endblock %}

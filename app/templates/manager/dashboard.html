@@ -1,0 +1,67 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import badge %}
+{% block title %}Manager Dashboard · PyCareer{% endblock %}
+{% block content %}
+<div class="mb-4"><h1 class="h3 mb-1">Team dashboard</h1>
+    <p class="text-secondary">Monitor attendance, approvals, shifts and team capacity.</p></div>
+<div class="row g-3 mb-4">{% for icon,label,value,cls in [('bi-people','Team
+    members',team_count,'primary'),('bi-person-check','Present today',present,'success'),('bi-calendar-minus','Pending
+    leave',pending_leaves,'warning'),('bi-clock-history','Pending overtime',pending_ot,'info'),('bi-alarm','Late marks
+    this month',late_count,'danger')] %}
+    <div class="col-sm-6 col-xl">
+        <div class="metric-card"><span class="metric-icon bg-{{ cls }}-subtle text-{{ cls }}"><i
+                class="bi {{ icon }}"></i></span>
+            <div><small>{{ label }}</small><strong>{{ value }}</strong></div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card panel-card h-100">
+            <div class="card-body"><h2 class="h5">Team by department</h2>
+                <div class="chart-wrap">
+                    <canvas id="teamChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card panel-card h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between"><h2 class="h5">Recent leave requests</h2><a
+                        href="{{ url_for('manager.leaves') }}" class="small">Review all</a></div>
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Dates</th>
+                            <th>Days</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>{% for r in recent_leaves %}
+                        <tr>
+                            <td>{{ r.employee.display_name }}
+                                <div class="small text-secondary">{{ r.leave_type.code }}</div>
+                            </td>
+                            <td>{{ r.start_date.strftime('%d %b') }}–{{ r.end_date.strftime('%d %b') }}</td>
+                            <td>{{ r.days }}</td>
+                            <td>{{ badge(r.status) }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="4" class="text-center text-secondary py-4">No requests.</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>{% endblock %}
+{% block scripts %}
+<script>
+    const c=document.getElementById('teamChart');if(c)new Chart(c,{type:'doughnut',data:{labels:{{ chart['labels']|tojson }},datasets:[{data:{{ chart['values']|tojson }}}]},options:{responsive:true,maintainAspectRatio:false}});
+</script>{% endblock %}

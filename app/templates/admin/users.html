@@ -1,0 +1,77 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import field,checkbox %}{% block title %}Users & Roles · PyCareer{% endblock %}{% block content %}
+<div class="mb-4"><h1 class="h3 mb-1">Users & role access</h1>
+    <p class="text-secondary">Create portal accounts, manage roles and disable access. Use HR → Employees for full
+        employment records.</p></div>
+<div class="row g-4">
+    <div class="col-xl-4">
+        <div class="card panel-card">
+            <div class="card-body"><h2 class="h5">Create portal user</h2>
+                <form method="post">{{ form.hidden_tag() }}{{ field(form.full_name) }}{{ field(form.email) }}{{
+                    field(form.role,'form-select') }}{{ field(form.password) }}{{ checkbox(form.is_active) }}{{
+                    form.submit(class='btn btn-primary w-100') }}
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-8">
+        <div class="card panel-card mb-3">
+            <div class="card-body">
+                <form class="d-flex gap-2"><input class="form-control" name="q" value="{{ q }}"
+                                                  placeholder="Search users">
+                    <button class="btn btn-outline-primary">Search</button>
+                </form>
+            </div>
+        </div>
+        <div class="card panel-card">
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Role</th>
+                        <th>Employee link</th>
+                        <th>Last login</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>{% for u in users %}
+                    <tr>
+                        <td><strong>{{ u.full_name }}</strong>
+                            <div class="small text-secondary">{{ u.email }}</div>
+                        </td>
+                        <td>
+                            <form method="post" action="{{ url_for('admin.update_role', user_id=u.id) }}"
+                                  class="d-flex gap-1"><input type="hidden" name="csrf_token"
+                                                              value="{{ csrf_token() }}"><select
+                                    class="form-select form-select-sm" name="role">{% for role in
+                                ['admin','hr','manager','employee'] %}
+                                <option {% if role==u.role %}selected{% endif %}>{{ role }}</option>
+                                {% endfor %}</select>
+                                <button class="btn btn-sm btn-outline-primary">Save</button>
+                            </form>
+                        </td>
+                        <td>{{ u.employee_profile.employee_code if u.employee_profile else '—' }}</td>
+                        <td>{{ u.last_login_at.strftime('%d %b %Y %H:%M') if u.last_login_at else 'Never' }}</td>
+                        <td><span class="badge text-bg-{{ 'success' if u.is_active else 'secondary' }}">{{ 'Active' if u.is_active else 'Inactive' }}</span>
+                        </td>
+                        <td>
+                            <form method="post" action="{{ url_for('admin.toggle_user', user_id=u.id) }}"><input
+                                    type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <button class="btn btn-sm btn-outline-{{ 'danger' if u.is_active else 'success' }}">{{
+                                    'Disable' if u.is_active else 'Enable' }}
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center py-5 text-secondary">No users found.</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>{% endblock %}

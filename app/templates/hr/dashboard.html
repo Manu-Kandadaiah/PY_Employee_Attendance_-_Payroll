@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}HR Dashboard · PyCareer{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap gap-3 mb-4">
+    <div><h1 class="h3 mb-1">HR & payroll dashboard</h1>
+        <p class="text-secondary">Workforce health, attendance and payroll at a glance.</p></div>
+    <a class="btn btn-primary" href="{{ url_for('hr.employee_create') }}"><i class="bi bi-person-plus me-1"></i>Add
+        employee</a></div>
+<div class="row g-3 mb-4">{% for icon,label,value,cls in [('bi-people','Active
+    employees',total,'primary'),('bi-person-check','Present today',present,'success'),('bi-calendar-minus','Pending
+    leave',pending_leaves,'warning'),('bi-cash-stack','Current net payroll','₹{:,.0f}'.format(payroll_total),'info')] %}
+    <div class="col-sm-6 col-xl-3">
+        <div class="metric-card"><span class="metric-icon bg-{{ cls }}-subtle text-{{ cls }}"><i
+                class="bi {{ icon }}"></i></span>
+            <div><small>{{ label }}</small><strong>{{ value }}</strong></div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="card panel-card">
+            <div class="card-body"><h2 class="h5">Attendance distribution</h2>
+                <div class="chart-wrap">
+                    <canvas id="attendanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card panel-card">
+            <div class="card-body"><h2 class="h5">Headcount by department</h2>
+                <div class="chart-wrap">
+                    <canvas id="headcountChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card panel-card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between"><h2 class="h5">Payroll trend</h2><a
+                        href="{{ url_for('hr.payroll') }}" class="small">Manage payroll</a></div>
+                <div class="chart-wrap-wide">
+                    <canvas id="payrollChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>{% endblock %}
+{% block scripts %}
+<script>
+    const make=(id,type,labels,values,label)=>{const c=document.getElementById(id);if(c)new Chart(c,{type,data:{labels,datasets:[{label,data:values,borderRadius:7,tension:.3,fill:type==='line'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:type==='doughnut'}}}})};make('attendanceChart','doughnut',{{ attendance_chart['labels']|tojson }},{{ attendance_chart['values']|tojson }},'Records');make('headcountChart','bar',{{ headcount_chart['labels']|tojson }},{{ headcount_chart['values']|tojson }},'Employees');make('payrollChart','line',{{ payroll_chart['labels']|tojson }},{{ payroll_chart['values']|tojson }},'Net payroll');
+</script>{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import badge %}{% block title %}{{ period.label }} Payroll · PyCareer{% endblock %}{% block content %}
+<div class="d-flex justify-content-between flex-wrap gap-3 mb-4">
+    <div>
+        <div class="d-flex gap-2 align-items-center"><h1 class="h3 mb-0">{{ period.label }} payroll</h1>{{
+            badge(period.status) }}
+        </div>
+        <p class="text-secondary mb-0">{{ period.working_days }} working days · {{ entries|length }} employees</p></div>
+    <div class="d-flex flex-wrap gap-2"><a class="btn btn-outline-secondary"
+                                           href="{{ url_for('hr.payroll_report_csv', period_id=period.id) }}"><i
+            class="bi bi-filetype-csv me-1"></i>Export CSV</a>{% if period.status in ['draft','generated'] %}
+        <form method="post" action="{{ url_for('hr.payroll_generate', period_id=period.id) }}"><input type="hidden"
+                                                                                                      name="csrf_token"
+                                                                                                      value="{{ csrf_token() }}">
+            <button class="btn btn-primary">{{ 'Regenerate' if period.status=='generated' else 'Generate payroll' }}
+            </button>
+        </form>
+        {% endif %}{% if period.status=='generated' %}
+        <form method="post" action="{{ url_for('hr.payroll_approve', period_id=period.id) }}"
+              onsubmit="return confirm('Approve payroll and notify employees?')"><input type="hidden" name="csrf_token"
+                                                                                        value="{{ csrf_token() }}">
+            <button class="btn btn-success">Approve</button>
+        </form>
+        {% endif %}{% if period.status=='approved' %}
+        <form method="post" action="{{ url_for('hr.payroll_mark_paid', period_id=period.id) }}"
+              onsubmit="return confirm('Mark the complete payroll as paid?')"><input type="hidden" name="csrf_token"
+                                                                                     value="{{ csrf_token() }}">
+            <button class="btn btn-success">Mark paid</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="metric-card"><span class="metric-icon bg-primary-subtle text-primary"><i class="bi bi-wallet2"></i></span>
+            <div><small>Total gross</small><strong>₹{{ '{:,.2f}'.format(total_gross) }}</strong></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="metric-card"><span class="metric-icon bg-danger-subtle text-danger"><i
+                class="bi bi-dash-circle"></i></span>
+            <div><small>Total deductions</small><strong>₹{{ '{:,.2f}'.format(total_gross-total_net) }}</strong></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="metric-card"><span class="metric-icon bg-success-subtle text-success"><i
+                class="bi bi-cash-coin"></i></span>
+            <div><small>Total net</small><strong>₹{{ '{:,.2f}'.format(total_net) }}</strong></div>
+        </div>
+    </div>
+</div>
+<div class="card panel-card">
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead>
+            <tr>
+                <th>Employee</th>
+                <th>Attendance</th>
+                <th>Leave / LOP</th>
+                <th>OT</th>
+                <th>Gross</th>
+                <th>Deductions</th>
+                <th>Net</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>{% for e in entries %}
+            <tr>
+                <td><strong>{{ e.employee.display_name }}</strong>
+                    <div class="small text-secondary">{{ e.employee.employee_code }}</div>
+                </td>
+                <td>{{ e.attendance_days }}</td>
+                <td>{{ e.paid_leave_days }} / {{ e.unpaid_leave_days }}</td>
+                <td>{{ e.overtime_hours }}h</td>
+                <td>₹{{ '{:,.2f}'.format(e.gross_pay|float) }}</td>
+                <td>₹{{ '{:,.2f}'.format(e.total_deductions|float) }}</td>
+                <td class="fw-bold text-success">₹{{ '{:,.2f}'.format(e.net_pay|float) }}</td>
+                <td>{{ badge(e.payment_status) }}</td>
+                <td><a class="btn btn-sm btn-outline-danger" href="{{ url_for('hr.payroll_pdf', entry_id=e.id) }}"><i
+                        class="bi bi-file-earmark-pdf"></i></a></td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="9" class="text-center py-5 text-secondary">Generate payroll to create employee entries.
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>{% endblock %}

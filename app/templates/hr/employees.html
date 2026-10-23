@@ -1,0 +1,73 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import badge %}{% block title %}Employees · PyCareer{% endblock %}{% block content %}
+<div class="d-flex justify-content-between flex-wrap gap-3 mb-4">
+    <div><h1 class="h3 mb-1">Employee management</h1>
+        <p class="text-secondary">Employee records, reporting structure and compensation.</p></div>
+    <a class="btn btn-primary" href="{{ url_for('hr.employee_create') }}"><i class="bi bi-person-plus me-1"></i>Add
+        employee</a></div>
+<div class="card panel-card mb-4">
+    <div class="card-body">
+        <form class="row g-2">
+            <div class="col-md-5"><input class="form-control" name="q" value="{{ search }}"
+                                         placeholder="Search name, code or email"></div>
+            <div class="col-md-3"><select class="form-select" name="department">
+                <option value="">All departments</option>
+                {% for d in departments %}
+                <option value="{{ d.id }}" {% if d.id==department_id %}selected{% endif %}>{{ d.name }}</option>
+                {% endfor %}</select></div>
+            <div class="col-md-2"><select class="form-select" name="status">{% for s in
+                ['active','probation','notice','inactive','all'] %}
+                <option value="{{ s }}" {% if s==status %}selected{% endif %}>{{ s|title }}</option>
+                {% endfor %}</select></div>
+            <div class="col-md-2">
+                <button class="btn btn-outline-primary w-100">Apply filters</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="card panel-card">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+            <tr>
+                <th>Employee</th>
+                <th>Department</th>
+                <th>Designation</th>
+                <th>Manager</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>{% for e in employees %}
+            <tr>
+                <td><strong>{{ e.display_name }}</strong>
+                    <div class="small text-secondary">{{ e.employee_code }} · {{ e.user.email }}</div>
+                </td>
+                <td>{{ e.department.name }}</td>
+                <td>{{ e.designation }}</td>
+                <td>{{ e.manager.display_name if e.manager else '—' }}</td>
+                <td class="text-capitalize">{{ e.user.role }}</td>
+                <td>{{ badge(e.status) }}</td>
+                <td>
+                    <div class="d-flex gap-2"><a class="btn btn-sm btn-outline-primary"
+                                                 href="{{ url_for('hr.employee_edit', employee_id=e.id) }}">Edit</a>{%
+                        if e.status!='inactive' %}
+                        <form method="post" action="{{ url_for('hr.employee_deactivate', employee_id=e.id) }}"
+                              onsubmit="return confirm('Deactivate this employee?')"><input type="hidden"
+                                                                                            name="csrf_token"
+                                                                                            value="{{ csrf_token() }}">
+                            <button class="btn btn-sm btn-outline-danger">Deactivate</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="7" class="text-center py-5 text-secondary">No employees match the filters.</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>{% endblock %}

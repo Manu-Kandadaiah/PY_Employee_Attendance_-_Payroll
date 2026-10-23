@@ -1,0 +1,26 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import field %}
+{% block title %}Sign in · PyCareer People Operations{% endblock %}
+{% block content %}
+<div class="auth-layout">
+  <section class="auth-showcase">
+    <div class="auth-brand-kicker"><span class="glow-marker"></span> PYCAREER PEOPLE OPERATIONS</div>
+    <h1>Everything your people need. <span>One workspace.</span></h1>
+    <p>Attendance, leave, payroll and approvals—organized into a clearer, easier-to-use workforce platform.</p>
+    <div class="auth-benefits">
+      <div><i class="bi bi-calendar2-check"></i><span><strong>Attendance & leave</strong><small>Shift-aware tracking and approvals</small></span></div>
+      <div><i class="bi bi-wallet2"></i><span><strong>Payroll workspace</strong><small>Salary statements and records</small></span></div>
+      <div><i class="bi bi-shield-check"></i><span><strong>Role-based access</strong><small>Admin, HR, manager and employee views</small></span></div>
+    </div>
+    <div class="showcase-footnote">Portfolio demonstration • Fictional employee records</div>
+  </section>
+  <section class="auth-form-panel">
+    <div class="auth-form-head"><div class="auth-kicker">WELCOME BACK</div><h2>Sign in to PyCareer</h2><p>Access your employee and payroll workspace.</p></div>
+    <form method="post" novalidate>{{ form.hidden_tag() }}{{ field(form.email) }}{{ field(form.password) }}
+      <div class="form-check mb-4">{{ form.remember(class='form-check-input') }} {{ form.remember.label(class='form-check-label') }}</div>
+      {{ form.submit(class='btn btn-primary btn-lg w-100 auth-submit') }}
+    </form>
+    <div class="auth-hint"><i class="bi bi-info-circle me-2"></i>Local demo users: <strong>admin@pycareer.example</strong>, <strong>hr@pycareer.example</strong>, <strong>manager@pycareer.example</strong>, <strong>employee@pycareer.example</strong>. Password is the private <code>DEMO_PASSWORD</code> in your <code>.env</code> file.</div>
+    <div class="login-meta">© PyCareer • Internal demonstration only</div>
+  </section>
+</div>
+{% endblock %}

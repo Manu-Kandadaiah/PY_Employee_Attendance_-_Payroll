@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Data Cleaning & Charts | PyCareer{% endblock %}
+{% block content %}
+<div class="container" style="max-width:1000px">
+<h1 class="mb-2">Data Cleaning & Chart Reports</h1>
+<p class="text-muted">Upload raw CSV or XLSX data. The first worksheet is used for Excel. Each upload creates its own downloadable report folder. Payroll records are never changed.</p>
+<div class="card shadow-sm mb-4"><div class="card-body">
+<form method="post" enctype="multipart/form-data">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<label class="form-label" for="dataset">Raw data file (up to 10 MB)</label>
+<input class="form-control mb-3" type="file" id="dataset" name="dataset" accept=".csv,.xlsx" required>
+<button class="btn btn-primary" type="submit">Clean Data & Generate Charts</button>
+</form></div></div>
+<h2 class="h4">Previous reports</h2>
+{% if folders %}<div class="list-group">{% for folder in folders %}
+<a class="list-group-item list-group-item-action d-flex justify-content-between" href="{{ url_for('analytics.download', job=folder.name) }}"><span>Report {{ folder.name[:8] }}</span><span>Download ZIP</span></a>
+{% endfor %}</div>{% else %}<p>No reports generated yet.</p>{% endif %}
+<p class="mt-4 small text-muted">Cleaning removes exact duplicates and blank rows, trims spaces and standardizes headers. Missing data is reported, not guessed. Charts are exploratory, not verified payroll calculations.</p>
+</div>
+{% endblock %}

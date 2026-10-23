@@ -1,0 +1,45 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import field,checkbox %}{% block title %}Shift Master · PyCareer{% endblock %}{% block content %}
+<div class="mb-4"><h1 class="h3 mb-1">Shift master</h1>
+    <p class="text-secondary">Configure working windows, grace, breaks and overtime thresholds.</p></div>
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card panel-card">
+            <div class="card-body"><h2 class="h5">Create shift</h2>
+                <form method="post">{{ form.hidden_tag() }}{{ field(form.name) }}{{ field(form.code) }}
+                    <div class="row">
+                        <div class="col-6">{{ field(form.start_time) }}</div>
+                        <div class="col-6">{{ field(form.end_time) }}</div>
+                        <div class="col-6">{{ field(form.grace_minutes) }}</div>
+                        <div class="col-6">{{ field(form.break_minutes) }}</div>
+                    </div>
+                    {{ field(form.minimum_half_day_minutes) }}{{ field(form.overtime_threshold_minutes) }}{{
+                    checkbox(form.is_active) }}{{ form.submit(class='btn btn-primary w-100') }}
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="row g-3">{% for s in shifts %}
+            <div class="col-md-6">
+                <div class="card panel-card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div><span class="badge text-bg-primary">{{ s.code }}</span>
+                                <h2 class="h5 mt-2">{{ s.name }}</h2></div>
+                            <span class="badge text-bg-{{ 'success' if s.is_active else 'secondary' }}">{{ 'Active' if s.is_active else 'Inactive' }}</span>
+                        </div>
+                        <div class="display-6 fw-bold my-3">{{ s.start_time.strftime('%H:%M') }} <span
+                                class="text-secondary fs-5">to</span> {{ s.end_time.strftime('%H:%M') }}
+                        </div>
+                        <div class="small text-secondary">Grace {{ s.grace_minutes }} min · Break {{ s.break_minutes }}
+                            min · OT after {{ s.overtime_threshold_minutes }} min
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="empty-state">No shifts configured.</div>
+            {% endfor %}
+        </div>
+    </div>
+</div>{% endblock %}

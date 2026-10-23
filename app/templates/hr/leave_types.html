@@ -1,0 +1,51 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import field,checkbox %}{% block title %}Leave Policies · PyCareer{% endblock %}{% block content %}
+<div class="mb-4"><h1 class="h3 mb-1">Leave policies</h1>
+    <p class="text-secondary">Configure paid and unpaid leave categories and annual allocations.</p></div>
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card panel-card">
+            <div class="card-body"><h2 class="h5">New leave type</h2>
+                <form method="post">{{ form.hidden_tag() }}{{ field(form.name) }}{{ field(form.code) }}{{
+                    field(form.default_days) }}{{ checkbox(form.is_paid) }}{{ checkbox(form.requires_document) }}{{
+                    checkbox(form.is_active) }}{{ form.submit(class='btn btn-primary w-100') }}
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="card panel-card">
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead>
+                    <tr>
+                        <th>Policy</th>
+                        <th>Annual days</th>
+                        <th>Paid</th>
+                        <th>Document</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>{% for l in leave_types %}
+                    <tr>
+                        <td><strong>{{ l.name }}</strong>
+                            <div class="small text-secondary">{{ l.code }}</div>
+                        </td>
+                        <td>{{ l.default_days }}</td>
+                        <td>
+                            <i class="bi bi-{{ 'check-circle-fill text-success' if l.is_paid else 'x-circle text-secondary' }}"></i>
+                        </td>
+                        <td>{{ 'Required' if l.requires_document else 'Not required' }}</td>
+                        <td><span class="badge text-bg-{{ 'success' if l.is_active else 'secondary' }}">{{ 'Active' if l.is_active else 'Inactive' }}</span>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center py-5 text-secondary">No leave policies configured.</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import field,checkbox %}{% block title %}Departments · PyCareer{% endblock %}{% block content %}
+<div class="mb-4"><h1 class="h3 mb-1">Departments</h1>
+    <p class="text-secondary">Maintain the organization’s reporting and analytics dimensions.</p></div>
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card panel-card">
+            <div class="card-body"><h2 class="h5">New department</h2>
+                <form method="post">{{ form.hidden_tag() }}{{ field(form.name) }}{{ field(form.code) }}{{
+                    field(form.description) }}{{ checkbox(form.is_active) }}{{ form.submit(class='btn btn-primary
+                    w-100') }}
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="row g-3">{% for d in departments %}
+            <div class="col-md-6">
+                <div class="card panel-card h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between"><span
+                                class="badge text-bg-primary">{{ d.code }}</span><span
+                                class="badge text-bg-{{ 'success' if d.is_active else 'secondary' }}">{{ 'Active' if d.is_active else 'Inactive' }}</span>
+                        </div>
+                        <h2 class="h5 mt-3">{{ d.name }}</h2>
+                        <p class="text-secondary">{{ d.description or 'No description' }}</p>
+                        <div class="d-flex justify-content-between align-items-center"><span>{{ d.employees.count() }} employees</span>
+                            <form method="post" action="{{ url_for('admin.toggle_department', department_id=d.id) }}">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <button class="btn btn-sm btn-outline-secondary">Toggle status</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="empty-state">No departments configured.</div>
+            {% endfor %}
+        </div>
+    </div>
+</div>{% endblock %}

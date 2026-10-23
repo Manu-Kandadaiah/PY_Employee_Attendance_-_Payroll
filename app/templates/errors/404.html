@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% block title %}Page not found · PyCareer{% endblock %}{% block content %}
+<div class="error-state">
+    <div class="error-code">404</div>
+    <h1 class="h3">Page not found</h1>
+    <p class="text-secondary">The requested page could not be found.</p><a class="btn btn-primary"
+                                                                           href="{{ url_for('main.index') }}">Return
+    home</a></div>{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import badge %}
+{% block title %}My Attendance · PyCareer{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
+    <div><h1 class="h3 mb-1">My attendance</h1>
+        <p class="text-secondary mb-0">Daily check-ins, working hours, late marks and overtime.</p></div>
+    <form class="d-flex gap-2"><input class="form-control" type="number" name="year" value="{{ year }}" min="2000"
+                                      max="2100"><select class="form-select" name="month">{% for i in range(1,13) %}
+        <option value="{{ i }}" {% if i==month %}selected{% endif %}>{{ i }}</option>
+        {% endfor %}</select>
+        <button class="btn btn-outline-primary">Filter</button>
+    </form>
+</div>
+<div class="card panel-card">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Check in</th>
+                <th>Check out</th>
+                <th>Work hours</th>
+                <th>Late</th>
+                <th>Overtime</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>{% for r in records %}
+            <tr>
+                <td><strong>{{ r.attendance_date.strftime('%d %b %Y') }}</strong>
+                    <div class="small text-secondary">{{ r.attendance_date.strftime('%A') }}</div>
+                </td>
+                <td>{{ badge(r.status) }}</td>
+                <td>{{ r.check_in.strftime('%I:%M %p') if r.check_in else '—' }}</td>
+                <td>{{ r.check_out.strftime('%I:%M %p') if r.check_out else '—' }}</td>
+                <td>{{ '%.2f'|format(r.work_minutes/60) }}</td>
+                <td>{{ r.late_minutes }} min</td>
+                <td>{{ '%.2f'|format(r.overtime_minutes/60) }} h</td>
+                <td>{% if r.overtime_minutes > 0 and not r.overtime_request %}<a class="btn btn-sm btn-outline-primary"
+                                                                                 href="{{ url_for('employee.request_overtime', attendance_id=r.id) }}">Request
+                    OT</a>{% elif r.overtime_request %}{{ badge(r.overtime_request.status) }}{% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="8" class="text-center py-5 text-secondary">No attendance records for this period.</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>{% endblock %}

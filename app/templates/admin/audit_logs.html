@@ -1,0 +1,45 @@
+{% extends 'base.html' %}{% block title %}Audit Logs · PyCareer{% endblock %}{% block content %}
+<div class="d-flex justify-content-between flex-wrap gap-3 mb-4">
+    <div><h1 class="h3 mb-1">Audit logs</h1>
+        <p class="text-secondary">Security-sensitive actions and business workflow history.</p></div>
+    <form class="d-flex gap-2"><input class="form-control" name="action" value="{{ action }}"
+                                      placeholder="Filter by action">
+        <button class="btn btn-outline-primary">Filter</button>
+    </form>
+</div>
+<div class="card panel-card">
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>User</th>
+                <th>Action</th>
+                <th>Entity</th>
+                <th>IP address</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tbody>{% for log in pagination.items %}
+            <tr>
+                <td>{{ log.created_at.strftime('%d %b %Y %H:%M:%S') }}</td>
+                <td>{{ log.user.full_name if log.user else 'System' }}</td>
+                <td><code>{{ log.action }}</code></td>
+                <td>{{ log.entity_type or '—' }} {{ log.entity_id or '' }}</td>
+                <td>{{ log.ip_address or '—' }}</td>
+                <td class="small text-secondary">{{ log.details|truncate(80) if log.details else '—' }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center py-5 text-secondary">No logs found.</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer bg-white d-flex justify-content-between">{% if pagination.has_prev %}<a
+            href="?page={{ pagination.prev_num }}&action={{ action }}">Previous</a>{% else %}<span></span>{% endif
+        %}<span>Page {{ pagination.page }} of {{ pagination.pages or 1 }}</span>{% if pagination.has_next %}<a
+                href="?page={{ pagination.next_num }}&action={{ action }}">Next</a>{% endif %}
+    </div>
+</div>{% endblock %}

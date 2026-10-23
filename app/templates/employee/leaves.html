@@ -1,0 +1,67 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import field,badge %}
+{% block title %}Leave Management · PyCareer{% endblock %}
+{% block content %}
+<div class="mb-4"><h1 class="h3 mb-1">Leave management</h1>
+    <p class="text-secondary">Review balances and submit leave requests.</p></div>
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card panel-card">
+            <div class="card-body"><h2 class="h5">Request leave</h2>
+                <form method="post">{{ form.hidden_tag() }}{{ field(form.leave_type_id,'form-select') }}{{
+                    field(form.start_date) }}{{ field(form.end_date) }}{{ field(form.reason) }}{{ form.submit(class='btn
+                    btn-primary w-100') }}
+                </form>
+            </div>
+        </div>
+        <div class="card panel-card mt-4">
+            <div class="card-body"><h2 class="h5">Current balances</h2>{% for b in balances %}
+                <div class="d-flex justify-content-between border-bottom py-2">
+                    <span>{{ b.leave_type.code }}</span><strong>{{ b.available_days }} days</strong></div>
+                {% else %}<p class="text-secondary">No balances available.</p>{% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="card panel-card">
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead>
+                    <tr>
+                        <th>Leave type</th>
+                        <th>Dates</th>
+                        <th>Days</th>
+                        <th>Status</th>
+                        <th>Reviewer comments</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>{% for r in requests %}
+                    <tr>
+                        <td><strong>{{ r.leave_type.name }}</strong>
+                            <div class="small text-secondary">{{ r.reason|truncate(40) }}</div>
+                        </td>
+                        <td>{{ r.start_date.strftime('%d %b') }} – {{ r.end_date.strftime('%d %b %Y') }}</td>
+                        <td>{{ r.days }}</td>
+                        <td>{{ badge(r.status) }}</td>
+                        <td>{{ r.reviewer_comments or '—' }}</td>
+                        <td>{% if r.status=='pending' %}
+                            <form method="post" action="{{ url_for('employee.cancel_leave', request_id=r.id) }}"
+                                  onsubmit="return confirm('Cancel this request?')"><input type="hidden"
+                                                                                           name="csrf_token"
+                                                                                           value="{{ csrf_token() }}">
+                                <button class="btn btn-sm btn-outline-danger">Cancel</button>
+                            </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center text-secondary py-5">No leave requests yet.</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>{% endblock %}

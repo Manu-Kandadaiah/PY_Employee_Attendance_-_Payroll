@@ -1,0 +1,52 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import field %}{% block title %}{{ title }} · PyCareer{% endblock %}{% block content %}
+<div class="d-flex justify-content-between mb-4">
+    <div><h1 class="h3 mb-1">{{ title }}</h1>
+        <p class="text-secondary">Manage employment, hierarchy and monthly compensation.</p></div>
+    <a class="btn btn-light" href="{{ url_for('hr.employees') }}">Back</a></div>
+<form method="post" novalidate>{{ form.hidden_tag() }}
+    <div class="row g-4">
+        <div class="col-xl-7">
+            <div class="card panel-card">
+                <div class="card-body p-4"><h2 class="h5 mb-3">Employment details</h2>
+                    <div class="row">
+                        <div class="col-md-6">{{ field(form.full_name) }}</div>
+                        <div class="col-md-6">{{ field(form.email) }}</div>
+                        <div class="col-md-4">{{ field(form.employee_code) }}</div>
+                        <div class="col-md-4">{{ field(form.department_id,'form-select') }}</div>
+                        <div class="col-md-4">{{ field(form.manager_id,'form-select') }}</div>
+                        <div class="col-md-6">{{ field(form.designation) }}</div>
+                        <div class="col-md-3">{{ field(form.role,'form-select') }}</div>
+                        <div class="col-md-3">{{ field(form.status,'form-select') }}</div>
+                        <div class="col-md-6">{{ field(form.date_of_joining) }}</div>
+                        <div class="col-md-6">{{ field(form.employment_type,'form-select') }}</div>
+                        <div class="col-12">{{ field(form.password, help='Required for new employees. Leave blank during
+                            edit to keep the current password.') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-5">
+            <div class="card panel-card">
+                <div class="card-body p-4"><h2 class="h5 mb-3">Monthly salary structure</h2>
+                    <div class="row">
+                        <div class="col-6">{{ field(form.basic) }}</div>
+                        <div class="col-6">{{ field(form.hra) }}</div>
+                        <div class="col-6">{{ field(form.conveyance) }}</div>
+                        <div class="col-6">{{ field(form.medical) }}</div>
+                        <div class="col-6">{{ field(form.special_allowance) }}</div>
+                        <div class="col-6">{{ field(form.variable_pay) }}</div>
+                        <div class="col-6">{{ field(form.pf_percent) }}</div>
+                        <div class="col-6">{{ field(form.professional_tax) }}</div>
+                        <div class="col-6">{{ field(form.income_tax_percent) }}</div>
+                        <div class="col-6">{{ field(form.other_deduction) }}</div>
+                        <div class="col-12">{{ field(form.overtime_multiplier) }}</div>
+                    </div>
+                    <div class="d-grid gap-2">{{ form.submit(class='btn btn-primary btn-lg') }}<a class="btn btn-light"
+                                                                                                  href="{{ url_for('hr.employees') }}">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>{% endblock %}

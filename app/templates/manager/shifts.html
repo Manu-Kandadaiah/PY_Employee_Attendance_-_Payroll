@@ -1,0 +1,50 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import field %}{% block title %}Shift Scheduling · PyCareer{% endblock %}{% block content %}
+<div class="mb-4"><h1 class="h3 mb-1">Shift scheduling</h1>
+    <p class="text-secondary">Assign effective-dated shifts to employees.</p></div>
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card panel-card">
+            <div class="card-body"><h2 class="h5">New assignment</h2>
+                <form method="post">{{ form.hidden_tag() }}{{ field(form.employee_id,'form-select') }}{{
+                    field(form.shift_id,'form-select') }}{{ field(form.effective_from) }}{{ field(form.effective_to)
+                    }}{{ form.submit(class='btn btn-primary w-100') }}
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-8">
+        <div class="card panel-card">
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead>
+                    <tr>
+                        <th>Employee</th>
+                        <th>Shift</th>
+                        <th>Effective from</th>
+                        <th>Effective to</th>
+                    </tr>
+                    </thead>
+                    <tbody>{% for a in assignments %}
+                    <tr>
+                        <td>{{ a.employee.display_name }}
+                            <div class="small text-secondary">{{ a.employee.employee_code }}</div>
+                        </td>
+                        <td>{{ a.shift.name }}
+                            <div class="small text-secondary">{{ a.shift.start_time.strftime('%H:%M') }}–{{
+                                a.shift.end_time.strftime('%H:%M') }}
+                            </div>
+                        </td>
+                        <td>{{ a.effective_from.strftime('%d %b %Y') }}</td>
+                        <td>{{ a.effective_to.strftime('%d %b %Y') if a.effective_to else 'Ongoing' }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center py-5 text-secondary">No assignments.</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>{% endblock %}

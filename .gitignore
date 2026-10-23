@@ -1,0 +1,35 @@
+# Private configuration and virtual environments
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+.idea/
+.vscode/
+# Database and generated content
+instance/
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+uploads/**
+!uploads/.gitkeep
+!uploads/payslips/
+!uploads/payslips/.gitkeep
+# Caches and temporary files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+*.log
+.DS_Store
+Thumbs.db
+*.egg-info/
+dist/
+build/
+
+# Analytics reports (contain potentially sensitive employee data)
+**/analytics_outputs/

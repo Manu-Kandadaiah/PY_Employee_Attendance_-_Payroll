@@ -1,0 +1,143 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import badge %}
+{% block title %}Employee Dashboard · PyCareer{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-start flex-wrap gap-3 mb-4">
+    <div><h1 class="h3 mb-1">Good day, {{ employee.user.full_name.split()[0] }}</h1>
+        <p class="text-secondary mb-0">{{ employee.employee_code }} · {{ employee.designation }} · {{
+            employee.department.name }}</p></div>
+    <a class="btn btn-outline-primary" href="{{ url_for('employee.profile') }}"><i class="bi bi-person-gear me-1"></i>Update
+        profile</a></div>
+<div class="row g-3 mb-4">
+    <div class="col-sm-6 col-xl-3">
+        <div class="metric-card"><span class="metric-icon bg-primary-subtle text-primary"><i
+                class="bi bi-calendar-check"></i></span>
+            <div><small>Present this month</small><strong>{{ present_days }} days</strong></div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="metric-card"><span class="metric-icon bg-warning-subtle text-warning"><i
+                class="bi bi-clock-history"></i></span>
+            <div><small>Overtime this month</small><strong>{{ '%.1f'|format(overtime_hours) }} hrs</strong></div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="metric-card"><span class="metric-icon bg-success-subtle text-success"><i
+                class="bi bi-cash-coin"></i></span>
+            <div><small>Latest net pay</small><strong>{% if latest_payslip %}₹{{
+                '{:,.0f}'.format(latest_payslip.net_pay|float) }}{% else %}—{% endif %}</strong></div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <div class="metric-card"><span class="metric-icon bg-info-subtle text-info"><i
+                class="bi bi-briefcase"></i></span>
+            <div><small>Employment</small><strong class="text-capitalize">{{ employee.status }}</strong></div>
+        </div>
+    </div>
+</div>
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card panel-card h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center"><h2 class="h5 mb-0">Today’s
+                    attendance</h2>{% if today_record %}{{ badge(today_record.status) }}{% endif %}
+                </div>
+                <div class="attendance-clock my-4">
+                    <div id="liveClock" class="display-5 fw-bold"></div>
+                    <div class="text-secondary">{{ now if now else '' }}</div>
+                </div>
+                <div class="row g-3 text-center mb-4">
+                    <div class="col-6">
+                        <div class="time-box"><small>Check in</small><strong>{{ today_record.check_in.strftime('%I:%M
+                            %p') if today_record and today_record.check_in else '—' }}</strong></div>
+                    </div>
+                    <div class="col-6">
+                        <div class="time-box"><small>Check out</small><strong>{{ today_record.check_out.strftime('%I:%M
+                            %p') if today_record and today_record.check_out else '—' }}</strong></div>
+                    </div>
+                </div>
+                {% if not today_record or not today_record.check_in %}
+                <form method="post" action="{{ url_for('employee.attendance_check_in') }}"><input type="hidden"
+                                                                                                  name="csrf_token"
+                                                                                                  value="{{ csrf_token() }}">
+                    <button class="btn btn-success btn-lg w-100"><i class="bi bi-box-arrow-in-right me-2"></i>Check in
+                    </button>
+                </form>
+                {% elif not today_record.check_out %}
+                <form method="post" action="{{ url_for('employee.attendance_check_out') }}"><input type="hidden"
+                                                                                                   name="csrf_token"
+                                                                                                   value="{{ csrf_token() }}">
+                    <button class="btn btn-danger btn-lg w-100"><i class="bi bi-box-arrow-right me-2"></i>Check out
+                    </button>
+                </form>
+                {% else %}
+                <div class="alert alert-success mb-0">Attendance completed: {{ '%.1f'|format(today_record.work_minutes /
+                    60) }} working hours.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card panel-card h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between"><h2 class="h5">Recent work hours</h2><a
+                        href="{{ url_for('employee.attendance') }}" class="small">View all</a></div>
+                <div class="chart-wrap">
+                    <canvas id="workHoursChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card panel-card">
+            <div class="card-body"><h2 class="h5">Leave balances</h2>
+                <div class="table-responsive">
+                    <table class="table align-middle mb-0">
+                        <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Allocated</th>
+                            <th>Used</th>
+                            <th>Pending</th>
+                            <th>Available</th>
+                        </tr>
+                        </thead>
+                        <tbody>{% for b in leave_balances %}
+                        <tr>
+                            <td>{{ b.leave_type.name }}</td>
+                            <td>{{ b.allocated_days }}</td>
+                            <td>{{ b.used_days }}</td>
+                            <td>{{ b.pending_days }}</td>
+                            <td class="fw-bold">{{ b.available_days }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center text-secondary py-4">No leave balances configured.</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card panel-card">
+            <div class="card-body"><h2 class="h5">Upcoming holidays</h2>
+                <div class="list-group list-group-flush">{% for h in upcoming_holidays %}
+                    <div class="list-group-item px-0 d-flex justify-content-between">
+                        <div><strong>{{ h.name }}</strong>
+                            <div class="small text-secondary">{{ h.holiday_date.strftime('%A') }}</div>
+                        </div>
+                        <span class="date-chip">{{ h.holiday_date.strftime('%d %b') }}</span></div>
+                    {% else %}<p class="text-secondary mb-0">No upcoming holidays.</p>{% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+    window.addEventListener('DOMContentLoaded',()=>{const ctx=document.getElementById('workHoursChart'); if(ctx){new Chart(ctx,{type:'bar',data:{labels:{{ chart['labels']|tojson }},datasets:[{label:'Hours',data:{{ chart['values']|tojson }},borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,suggestedMax:9}}}})}});
+</script>{% endblock %}

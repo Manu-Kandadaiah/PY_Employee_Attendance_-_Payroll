@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard · PyCareer{% endblock %}
+{% block content %}
+<div class="mb-4"><h1 class="h3 mb-1">Administration dashboard</h1>
+    <p class="text-secondary">User access, organization structure and system activity.</p></div>
+<div class="row g-3 mb-4">{% for icon,label,key,cls in [('bi-people','Total
+    users','users','primary'),('bi-person-check','Active users','active_users','success'),('bi-person-vcard','Active
+    employees','employees','info'),('bi-diagram-3','Departments','departments','warning')] %}
+    <div class="col-sm-6 col-xl-3">
+        <div class="metric-card"><span class="metric-icon bg-{{ cls }}-subtle text-{{ cls }}"><i
+                class="bi {{ icon }}"></i></span>
+            <div><small>{{ label }}</small><strong>{{ counts[key] }}</strong></div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card panel-card h-100">
+            <div class="card-body"><h2 class="h5">Users by role</h2>
+                <div class="chart-wrap">
+                    <canvas id="roleChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card panel-card h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between"><h2 class="h5">Recent audit activity</h2><a
+                        href="{{ url_for('admin.audit_logs') }}" class="small">View all</a></div>
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>User</th>
+                            <th>Action</th>
+                            <th>Entity</th>
+                        </tr>
+                        </thead>
+                        <tbody>{% for log in recent_logs %}
+                        <tr>
+                            <td class="small">{{ log.created_at.strftime('%d %b %H:%M') }}</td>
+                            <td>{{ log.user.full_name if log.user else 'System' }}</td>
+                            <td><code>{{ log.action }}</code></td>
+                            <td>{{ log.entity_type or '—' }} {{ log.entity_id or '' }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="4" class="text-center text-secondary py-4">No audit activity.</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>{% endblock %}
+{% block scripts %}
+<script>
+    const c=document.getElementById('roleChart');if(c)new Chart(c,{type:'doughnut',data:{labels:{{ role_chart['labels']|tojson }},datasets:[{data:{{ role_chart['values']|tojson }}}]},options:{responsive:true,maintainAspectRatio:false}});
+</script>{% endblock %}

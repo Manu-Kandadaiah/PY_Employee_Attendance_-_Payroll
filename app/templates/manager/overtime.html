@@ -1,0 +1,57 @@
+{% extends 'base.html' %}{% from 'macros/forms.html' import badge %}{% block title %}Overtime Approvals · PyCareer{% endblock %}{% block content %}
+<div class="d-flex justify-content-between flex-wrap gap-3 mb-4">
+    <div><h1 class="h3 mb-1">Overtime approvals</h1>
+        <p class="text-secondary">Review calculated and requested overtime.</p></div>
+    <div class="btn-group">{% for s in ['pending','approved','rejected','all'] %}<a
+            class="btn btn-sm btn-{{ 'primary' if status==s else 'outline-primary' }}" href="?status={{ s }}">{{ s|title
+        }}</a>{% endfor %}
+    </div>
+</div>
+<div class="card panel-card">
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead>
+            <tr>
+                <th>Employee</th>
+                <th>Date</th>
+                <th>Requested</th>
+                <th>Reason</th>
+                <th>Status / action</th>
+            </tr>
+            </thead>
+            <tbody>{% for r in items %}
+            <tr>
+                <td>{{ r.employee.display_name }}
+                    <div class="small text-secondary">{{ r.employee.employee_code }}</div>
+                </td>
+                <td>{{ r.attendance.attendance_date.strftime('%d %b %Y') }}</td>
+                <td>{{ '%.2f'|format(r.requested_minutes/60) }} h</td>
+                <td>{{ r.reason }}</td>
+                <td>{% if r.status=='pending' %}
+                    <form method="post"
+                          action="{{ url_for('manager.review_overtime', request_id=r.id, decision='approve') }}"
+                          class="d-flex gap-2 mb-2"><input type="hidden" name="csrf_token"
+                                                           value="{{ csrf_token() }}"><input
+                            class="form-control form-control-sm" type="number" name="approved_minutes"
+                            value="{{ r.requested_minutes }}" min="0" max="{{ r.requested_minutes }}">
+                        <button class="btn btn-sm btn-success">Approve</button>
+                    </form>
+                    <form method="post"
+                          action="{{ url_for('manager.review_overtime', request_id=r.id, decision='reject') }}"><input
+                            type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                        <button class="btn btn-sm btn-outline-danger">Reject</button>
+                    </form>
+                    {% else %}{{ badge(r.status) }}
+                    <div class="small text-secondary">Approved {{ '%.2f'|format(r.approved_minutes/60) }} h</div>
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" class="text-center py-5 text-secondary">No requests.</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>{% endblock %}

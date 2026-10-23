@@ -1,0 +1,201 @@
+﻿employee_code,full_name,email,role,department,designation,join_date,manager_code,status
+PYC0001,Ananya Rao,hr@pycareer.com,hr,People & Culture,HR Operations Lead,2022-04-04,,active
+PYC0002,Rahul Menon,manager@pycareer.com,manager,Engineering,Engineering Manager,2021-08-02,,active
+PYC0003,Neha Sharma,employee@pycareer.com,employee,Engineering,Python Developer,2024-01-08,PYC0002,active
+PYC0004,Ananya Jain,staff0004@pycareer.com,manager,Data & Analytics,Team Lead,2022-02-10,,active
+PYC0005,Anika Patel,staff0005@pycareer.com,manager,Product & Design,Team Lead,2022-03-10,,active
+PYC0006,Arjun Srinivasan,staff0006@pycareer.com,manager,Career Services,Team Lead,2022-04-10,,active
+PYC0007,Avni Iyer,staff0007@pycareer.com,manager,Recruitment,Team Lead,2022-05-10,,active
+PYC0008,Dev Nair,staff0008@pycareer.com,manager,Learning & Content,Team Lead,2022-06-10,,active
+PYC0009,Diya Singh,staff0009@pycareer.com,manager,Finance & Operations,Team Lead,2022-07-10,,active
+PYC0010,Yash Gupta,staff0010@pycareer.com,employee,Career Services,Placement Specialist,2026-06-19,PYC0006,active
+PYC0011,Eshan Nair,staff0011@pycareer.com,employee,Engineering,Senior Python Developer,2022-01-08,PYC0002,active
+PYC0012,Nikhil Singh,staff0012@pycareer.com,employee,Learning & Content,Content Specialist,2022-01-23,PYC0008,active
+PYC0013,Tanvi Gupta,staff0013@pycareer.com,employee,Product & Design,UX Designer,2022-01-07,PYC0005,active
+PYC0014,Anika Mehta,staff0014@pycareer.com,employee,Engineering,Senior Python Developer,2023-02-24,PYC0002,active
+PYC0015,Krisha Sharma,staff0015@pycareer.com,employee,Learning & Content,Curriculum Developer,2022-09-04,PYC0008,active
+PYC0016,Riya Ghosh,staff0016@pycareer.com,employee,Product & Design,Product Analyst,2025-08-01,PYC0005,active
+PYC0017,Aarav Menon,staff0017@pycareer.com,employee,People & Culture,People Operations Associate,2023-03-19,PYC0001,active
+PYC0018,Isha Shah,staff0018@pycareer.com,employee,Recruitment,Recruiter,2024-01-02,PYC0007,active
+PYC0019,Pooja Desai,staff0019@pycareer.com,employee,Data & Analytics,Data Analyst,2022-08-03,PYC0004,probation
+PYC0020,Tara Kulkarni,staff0020@pycareer.com,employee,Finance & Operations,Payroll Associate,2025-04-17,PYC0009,active
+PYC0021,Arjun Reddy,staff0021@pycareer.com,employee,Recruitment,Talent Specialist,2023-02-06,PYC0007,active
+PYC0022,Manav Desai,staff0022@pycareer.com,employee,Data & Analytics,Analytics Engineer,2025-07-03,PYC0004,active
+PYC0023,Sahil Kulkarni,staff0023@pycareer.com,employee,Finance & Operations,Operations Executive,2024-01-05,PYC0009,active
+PYC0024,Aditi Reddy,staff0024@pycareer.com,employee,Career Services,Career Coach,2025-04-25,PYC0006,active
+PYC0025,Ishaan Chandra,staff0025@pycareer.com,employee,Engineering,QA Engineer,2021-06-04,PYC0002,active
+PYC0026,Pranav Kapoor,staff0026@pycareer.com,employee,Learning & Content,Curriculum Developer,2025-04-01,PYC0008,active
+PYC0027,Varun Rao,staff0027@pycareer.com,employee,Product & Design,Product Owner,2021-07-08,PYC0005,active
+PYC0028,Avni Bhat,staff0028@pycareer.com,employee,Engineering,Frontend Developer,2024-02-24,PYC0002,active
+PYC0029,Meera Joshi,staff0029@pycareer.com,employee,Learning & Content,Content Specialist,2021-06-02,PYC0008,active
+PYC0030,Sanjana Pillai,staff0030@pycareer.com,employee,Product & Design,Product Owner,2024-01-24,PYC0005,active
+PYC0031,Aditya Verma,staff0031@pycareer.com,employee,People & Culture,HR Coordinator,2021-04-01,PYC0001,active
+PYC0032,Kabir Jain,staff0032@pycareer.com,employee,Recruitment,Employer Partnerships Associate,2022-05-17,PYC0007,active
+PYC0033,Priya Pillai,staff0033@pycareer.com,employee,Data & Analytics,Data Engineer,2026-09-22,PYC0004,active
+PYC0034,Vedika Verma,staff0034@pycareer.com,employee,Finance & Operations,Operations Executive,2026-01-10,PYC0009,active
+PYC0035,Dev Jain,staff0035@pycareer.com,employee,Recruitment,Talent Specialist,2021-02-01,PYC0007,active
+PYC0036,Mihir Patel,staff0036@pycareer.com,employee,Data & Analytics,Data Analyst,2025-01-02,PYC0004,active
+PYC0037,Sanya Srinivasan,staff0037@pycareer.com,employee,Finance & Operations,Operations Executive,2024-09-09,PYC0009,active
+PYC0038,Akash Iyer,staff0038@pycareer.com,employee,Career Services,Placement Specialist,2021-08-24,PYC0006,probation
+PYC0039,Kavya Nair,staff0039@pycareer.com,employee,Engineering,QA Engineer,2026-04-23,PYC0002,active
+PYC0040,Rhea Singh,staff0040@pycareer.com,employee,Learning & Content,Content Specialist,2026-09-23,PYC0008,active
+PYC0041,Vihaan Gupta,staff0041@pycareer.com,employee,Product & Design,UI Designer,2025-09-16,PYC0005,active
+PYC0042,Diya Mehta,staff0042@pycareer.com,employee,Engineering,Frontend Developer,2026-05-11,PYC0002,active
+PYC0043,Naina Sharma,staff0043@pycareer.com,employee,Learning & Content,Python Trainer,2024-09-19,PYC0008,active
+PYC0044,Shaurya Gupta,staff0044@pycareer.com,employee,Product & Design,UX Designer,2026-06-06,PYC0005,active
+PYC0045,Ananya Mehta,staff0045@pycareer.com,employee,People & Culture,HR Coordinator,2025-03-15,PYC0001,active
+PYC0046,Kiran Sharma,staff0046@pycareer.com,employee,Recruitment,Employer Partnerships Associate,2023-08-05,PYC0007,active
+PYC0047,Rohan Ghosh,staff0047@pycareer.com,employee,Data & Analytics,Analytics Engineer,2021-01-26,PYC0004,active
+PYC0048,Yash Menon,staff0048@pycareer.com,employee,Finance & Operations,Payroll Associate,2026-05-22,PYC0009,active
+PYC0049,Eshan Shah,staff0049@pycareer.com,employee,Recruitment,Recruiter,2025-04-23,PYC0007,active
+PYC0050,Nikhil Desai,staff0050@pycareer.com,employee,Data & Analytics,BI Analyst,2026-08-14,PYC0004,active
+PYC0051,Tanvi Kulkarni,staff0051@pycareer.com,employee,Finance & Operations,Payroll Associate,2022-08-08,PYC0009,active
+PYC0052,Anika Reddy,staff0052@pycareer.com,employee,Career Services,Placement Specialist,2026-01-20,PYC0006,active
+PYC0053,Krisha Chandra,staff0053@pycareer.com,employee,Engineering,Senior Python Developer,2025-06-03,PYC0002,active
+PYC0054,Riya Kapoor,staff0054@pycareer.com,employee,Learning & Content,Curriculum Developer,2024-06-26,PYC0008,active
+PYC0055,Aarav Reddy,staff0055@pycareer.com,employee,Product & Design,UX Designer,2023-02-20,PYC0005,active
+PYC0056,Isha Chandra,staff0056@pycareer.com,employee,Engineering,QA Engineer,2021-05-24,PYC0002,active
+PYC0057,Pooja Kapoor,staff0057@pycareer.com,employee,Learning & Content,Curriculum Developer,2024-09-15,PYC0008,probation
+PYC0058,Tara Rao,staff0058@pycareer.com,employee,Product & Design,UX Designer,2025-01-05,PYC0005,active
+PYC0059,Arjun Bhat,staff0059@pycareer.com,employee,People & Culture,HR Executive,2024-04-13,PYC0001,active
+PYC0060,Manav Joshi,staff0060@pycareer.com,employee,Recruitment,Recruiter,2021-04-16,PYC0007,active
+PYC0061,Sahil Pillai,staff0061@pycareer.com,employee,Data & Analytics,Data Engineer,2022-07-14,PYC0004,active
+PYC0062,Aditi Verma,staff0062@pycareer.com,employee,Finance & Operations,Payroll Associate,2022-07-11,PYC0009,active
+PYC0063,Ishaan Jain,staff0063@pycareer.com,employee,Recruitment,Recruiter,2023-01-02,PYC0007,active
+PYC0064,Pranav Patel,staff0064@pycareer.com,employee,Data & Analytics,BI Analyst,2026-08-17,PYC0004,active
+PYC0065,Varun Srinivasan,staff0065@pycareer.com,employee,Finance & Operations,Operations Executive,2024-03-02,PYC0009,active
+PYC0066,Avni Jain,staff0066@pycareer.com,employee,Career Services,Placement Specialist,2022-08-16,PYC0006,active
+PYC0067,Meera Patel,staff0067@pycareer.com,employee,Engineering,Software Engineer,2023-07-11,PYC0002,active
+PYC0068,Sanjana Srinivasan,staff0068@pycareer.com,employee,Learning & Content,Curriculum Developer,2025-04-18,PYC0008,active
+PYC0069,Aditya Iyer,staff0069@pycareer.com,employee,Product & Design,Product Owner,2025-04-13,PYC0005,active
+PYC0070,Kabir Nair,staff0070@pycareer.com,employee,Engineering,Backend Developer,2021-07-17,PYC0002,active
+PYC0071,Priya Singh,staff0071@pycareer.com,employee,Learning & Content,Curriculum Developer,2025-09-03,PYC0008,active
+PYC0072,Vedika Gupta,staff0072@pycareer.com,employee,Product & Design,Product Owner,2021-02-22,PYC0005,active
+PYC0073,Dev Mehta,staff0073@pycareer.com,employee,People & Culture,HR Coordinator,2021-04-18,PYC0001,active
+PYC0074,Mihir Sharma,staff0074@pycareer.com,employee,Recruitment,Employer Partnerships Associate,2025-05-06,PYC0007,active
+PYC0075,Sanya Ghosh,staff0075@pycareer.com,employee,Data & Analytics,Data Engineer,2023-05-06,PYC0004,active
+PYC0076,Akash Menon,staff0076@pycareer.com,employee,Finance & Operations,Finance Analyst,2026-06-25,PYC0009,probation
+PYC0077,Kavya Sharma,staff0077@pycareer.com,employee,Recruitment,Talent Specialist,2021-09-18,PYC0007,active
+PYC0078,Rhea Ghosh,staff0078@pycareer.com,employee,Data & Analytics,Data Engineer,2022-05-05,PYC0004,active
+PYC0079,Vihaan Menon,staff0079@pycareer.com,employee,Finance & Operations,Finance Analyst,2023-06-22,PYC0009,active
+PYC0080,Diya Shah,staff0080@pycareer.com,employee,Career Services,Student Success Associate,2022-03-14,PYC0006,active
+PYC0081,Naina Desai,staff0081@pycareer.com,employee,Engineering,Backend Developer,2022-05-15,PYC0002,active
+PYC0082,Shaurya Kulkarni,staff0082@pycareer.com,employee,Learning & Content,Content Specialist,2023-07-07,PYC0008,active
+PYC0083,Ananya Reddy,staff0083@pycareer.com,employee,Product & Design,Product Analyst,2022-01-07,PYC0005,active
+PYC0084,Kiran Chandra,staff0084@pycareer.com,employee,Engineering,QA Engineer,2025-06-13,PYC0002,active
+PYC0085,Rohan Kapoor,staff0085@pycareer.com,employee,Learning & Content,Curriculum Developer,2024-06-23,PYC0008,active
+PYC0086,Yash Rao,staff0086@pycareer.com,employee,Product & Design,Product Owner,2023-04-09,PYC0005,active
+PYC0087,Eshan Bhat,staff0087@pycareer.com,employee,People & Culture,HR Coordinator,2021-06-04,PYC0001,active
+PYC0088,Nikhil Kapoor,staff0088@pycareer.com,employee,Recruitment,Talent Specialist,2025-08-25,PYC0007,active
+PYC0089,Tanvi Rao,staff0089@pycareer.com,employee,Data & Analytics,Data Engineer,2021-05-26,PYC0004,active
+PYC0090,Anika Bhat,staff0090@pycareer.com,employee,Finance & Operations,Operations Executive,2021-06-18,PYC0009,active
+PYC0091,Krisha Joshi,staff0091@pycareer.com,employee,Recruitment,Employer Partnerships Associate,2021-07-22,PYC0007,active
+PYC0092,Riya Pillai,staff0092@pycareer.com,employee,Data & Analytics,Data Engineer,2024-05-02,PYC0004,active
+PYC0093,Aarav Verma,staff0093@pycareer.com,employee,Finance & Operations,Payroll Associate,2021-03-17,PYC0009,active
+PYC0094,Isha Jain,staff0094@pycareer.com,employee,Career Services,Career Coach,2026-03-05,PYC0006,active
+PYC0095,Pooja Patel,staff0095@pycareer.com,employee,Engineering,QA Engineer,2021-06-26,PYC0002,probation
+PYC0096,Tara Srinivasan,staff0096@pycareer.com,employee,Learning & Content,Content Specialist,2021-05-10,PYC0008,active
+PYC0097,Arjun Iyer,staff0097@pycareer.com,employee,Product & Design,UX Designer,2025-09-19,PYC0005,active
+PYC0098,Manav Nair,staff0098@pycareer.com,employee,Engineering,Backend Developer,2025-04-13,PYC0002,active
+PYC0099,Sahil Srinivasan,staff0099@pycareer.com,employee,Learning & Content,Content Specialist,2021-06-04,PYC0008,active
+PYC0100,Aditi Iyer,staff0100@pycareer.com,employee,Product & Design,Product Owner,2023-01-18,PYC0005,active
+PYC0101,Ishaan Nair,staff0101@pycareer.com,employee,People & Culture,People Operations Associate,2023-03-11,PYC0001,active
+PYC0102,Pranav Singh,staff0102@pycareer.com,employee,Recruitment,Talent Specialist,2023-09-02,PYC0007,active
+PYC0103,Varun Gupta,staff0103@pycareer.com,employee,Data & Analytics,Data Analyst,2023-08-02,PYC0004,active
+PYC0104,Avni Mehta,staff0104@pycareer.com,employee,Finance & Operations,Operations Executive,2023-03-23,PYC0009,active
+PYC0105,Meera Sharma,staff0105@pycareer.com,employee,Recruitment,Recruiter,2026-06-12,PYC0007,active
+PYC0106,Sanjana Ghosh,staff0106@pycareer.com,employee,Data & Analytics,Data Analyst,2026-06-23,PYC0004,active
+PYC0107,Aditya Menon,staff0107@pycareer.com,employee,Finance & Operations,Operations Executive,2021-04-20,PYC0009,active
+PYC0108,Kabir Shah,staff0108@pycareer.com,employee,Career Services,Placement Specialist,2022-02-25,PYC0006,active
+PYC0109,Priya Desai,staff0109@pycareer.com,employee,Engineering,DevOps Engineer,2025-01-08,PYC0002,active
+PYC0110,Vedika Menon,staff0110@pycareer.com,employee,Learning & Content,Content Specialist,2021-01-11,PYC0008,active
+PYC0111,Dev Shah,staff0111@pycareer.com,employee,Product & Design,Product Analyst,2022-02-24,PYC0005,active
+PYC0112,Mihir Desai,staff0112@pycareer.com,employee,Engineering,Backend Developer,2022-08-14,PYC0002,active
+PYC0113,Sanya Kulkarni,staff0113@pycareer.com,employee,Learning & Content,Curriculum Developer,2021-09-22,PYC0008,active
+PYC0114,Akash Reddy,staff0114@pycareer.com,employee,Product & Design,UI Designer,2026-01-11,PYC0005,probation
+PYC0115,Kavya Chandra,staff0115@pycareer.com,employee,People & Culture,HR Executive,2024-06-21,PYC0001,active
+PYC0116,Rhea Kapoor,staff0116@pycareer.com,employee,Recruitment,Talent Specialist,2023-04-10,PYC0007,active
+PYC0117,Vihaan Rao,staff0117@pycareer.com,employee,Data & Analytics,Analytics Engineer,2025-09-22,PYC0004,active
+PYC0118,Diya Bhat,staff0118@pycareer.com,employee,Finance & Operations,Operations Executive,2025-05-06,PYC0009,active
+PYC0119,Naina Joshi,staff0119@pycareer.com,employee,Recruitment,Employer Partnerships Associate,2023-08-02,PYC0007,active
+PYC0120,Shaurya Pillai,staff0120@pycareer.com,employee,Data & Analytics,BI Analyst,2026-02-01,PYC0004,active
+PYC0121,Ananya Bhat,staff0121@pycareer.com,employee,Finance & Operations,Finance Analyst,2021-06-25,PYC0009,active
+PYC0122,Kiran Joshi,staff0122@pycareer.com,employee,Career Services,Placement Specialist,2021-01-02,PYC0006,active
+PYC0123,Rohan Pillai,staff0123@pycareer.com,employee,Engineering,QA Engineer,2021-05-24,PYC0002,active
+PYC0124,Yash Verma,staff0124@pycareer.com,employee,Learning & Content,Python Trainer,2021-04-26,PYC0008,active
+PYC0125,Eshan Jain,staff0125@pycareer.com,employee,Product & Design,UX Designer,2023-02-21,PYC0005,active
+PYC0126,Nikhil Patel,staff0126@pycareer.com,employee,Engineering,DevOps Engineer,2025-08-05,PYC0002,active
+PYC0127,Tanvi Srinivasan,staff0127@pycareer.com,employee,Learning & Content,Content Specialist,2022-07-11,PYC0008,active
+PYC0128,Anika Iyer,staff0128@pycareer.com,employee,Product & Design,UX Designer,2026-03-04,PYC0005,active
+PYC0129,Krisha Nair,staff0129@pycareer.com,employee,People & Culture,HR Coordinator,2025-02-05,PYC0001,active
+PYC0130,Riya Singh,staff0130@pycareer.com,employee,Recruitment,Recruiter,2022-01-13,PYC0007,active
+PYC0131,Aarav Gupta,staff0131@pycareer.com,employee,Data & Analytics,BI Analyst,2023-03-22,PYC0004,active
+PYC0132,Isha Nair,staff0132@pycareer.com,employee,Finance & Operations,Finance Analyst,2022-01-03,PYC0009,active
+PYC0133,Pooja Singh,staff0133@pycareer.com,employee,Recruitment,Recruiter,2023-08-03,PYC0007,probation
+PYC0134,Tara Gupta,staff0134@pycareer.com,employee,Data & Analytics,Data Engineer,2022-04-13,PYC0004,active
+PYC0135,Arjun Mehta,staff0135@pycareer.com,employee,Finance & Operations,Finance Analyst,2025-07-07,PYC0009,active
+PYC0136,Manav Sharma,staff0136@pycareer.com,employee,Career Services,Student Success Associate,2025-04-19,PYC0006,active
+PYC0137,Sahil Ghosh,staff0137@pycareer.com,employee,Engineering,Backend Developer,2022-03-10,PYC0002,active
+PYC0138,Aditi Menon,staff0138@pycareer.com,employee,Learning & Content,Python Trainer,2021-01-24,PYC0008,active
+PYC0139,Ishaan Shah,staff0139@pycareer.com,employee,Product & Design,Product Owner,2026-05-05,PYC0005,active
+PYC0140,Pranav Desai,staff0140@pycareer.com,employee,Engineering,QA Engineer,2022-06-10,PYC0002,active
+PYC0141,Varun Kulkarni,staff0141@pycareer.com,employee,Learning & Content,Content Specialist,2022-09-02,PYC0008,active
+PYC0142,Avni Reddy,staff0142@pycareer.com,employee,Product & Design,UI Designer,2021-09-13,PYC0005,active
+PYC0143,Meera Desai,staff0143@pycareer.com,employee,People & Culture,HR Coordinator,2022-09-19,PYC0001,active
+PYC0144,Sanjana Kulkarni,staff0144@pycareer.com,employee,Recruitment,Recruiter,2024-08-24,PYC0007,active
+PYC0145,Aditya Reddy,staff0145@pycareer.com,employee,Data & Analytics,Data Engineer,2026-08-05,PYC0004,active
+PYC0146,Kabir Chandra,staff0146@pycareer.com,employee,Finance & Operations,Payroll Associate,2022-08-03,PYC0009,active
+PYC0147,Priya Kapoor,staff0147@pycareer.com,employee,Recruitment,Employer Partnerships Associate,2023-08-12,PYC0007,active
+PYC0148,Vedika Rao,staff0148@pycareer.com,employee,Data & Analytics,BI Analyst,2024-06-12,PYC0004,active
+PYC0149,Dev Bhat,staff0149@pycareer.com,employee,Finance & Operations,Payroll Associate,2023-02-08,PYC0009,active
+PYC0150,Mihir Joshi,staff0150@pycareer.com,employee,Career Services,Career Coach,2025-04-20,PYC0006,active
+PYC0151,Sanya Pillai,staff0151@pycareer.com,employee,Engineering,Software Engineer,2024-07-01,PYC0002,active
+PYC0152,Akash Verma,staff0152@pycareer.com,employee,Learning & Content,Python Trainer,2021-02-23,PYC0008,probation
+PYC0153,Kavya Jain,staff0153@pycareer.com,employee,Product & Design,UX Designer,2023-09-20,PYC0005,active
+PYC0154,Rhea Pillai,staff0154@pycareer.com,employee,Engineering,Frontend Developer,2023-02-19,PYC0002,active
+PYC0155,Vihaan Verma,staff0155@pycareer.com,employee,Learning & Content,Curriculum Developer,2025-04-04,PYC0008,active
+PYC0156,Diya Jain,staff0156@pycareer.com,employee,Product & Design,UI Designer,2023-01-19,PYC0005,active
+PYC0157,Naina Patel,staff0157@pycareer.com,employee,People & Culture,People Operations Associate,2023-03-08,PYC0001,active
+PYC0158,Shaurya Srinivasan,staff0158@pycareer.com,employee,Recruitment,Talent Specialist,2023-07-17,PYC0007,active
+PYC0159,Ananya Iyer,staff0159@pycareer.com,employee,Data & Analytics,BI Analyst,2022-01-24,PYC0004,active
+PYC0160,Kiran Nair,staff0160@pycareer.com,employee,Finance & Operations,Payroll Associate,2022-05-21,PYC0009,active
+PYC0161,Rohan Singh,staff0161@pycareer.com,employee,Recruitment,Talent Specialist,2026-04-22,PYC0007,active
+PYC0162,Yash Gupta,staff0162@pycareer.com,employee,Data & Analytics,BI Analyst,2025-06-13,PYC0004,active
+PYC0163,Eshan Mehta,staff0163@pycareer.com,employee,Finance & Operations,Operations Executive,2021-04-25,PYC0009,active
+PYC0164,Nikhil Sharma,staff0164@pycareer.com,employee,Career Services,Career Coach,2024-04-01,PYC0006,active
+PYC0165,Tanvi Gupta,staff0165@pycareer.com,employee,Engineering,DevOps Engineer,2025-05-13,PYC0002,active
+PYC0166,Anika Mehta,staff0166@pycareer.com,employee,Learning & Content,Python Trainer,2025-02-25,PYC0008,active
+PYC0167,Krisha Sharma,staff0167@pycareer.com,employee,Product & Design,Product Owner,2022-09-13,PYC0005,active
+PYC0168,Riya Ghosh,staff0168@pycareer.com,employee,Engineering,Senior Python Developer,2025-08-14,PYC0002,active
+PYC0169,Aarav Menon,staff0169@pycareer.com,employee,Learning & Content,Curriculum Developer,2026-02-15,PYC0008,active
+PYC0170,Isha Shah,staff0170@pycareer.com,employee,Product & Design,Product Analyst,2022-02-12,PYC0005,active
+PYC0171,Pooja Desai,staff0171@pycareer.com,employee,People & Culture,People Operations Associate,2024-04-18,PYC0001,probation
+PYC0172,Tara Kulkarni,staff0172@pycareer.com,employee,Recruitment,Employer Partnerships Associate,2024-01-25,PYC0007,active
+PYC0173,Arjun Reddy,staff0173@pycareer.com,employee,Data & Analytics,Data Engineer,2023-06-09,PYC0004,active
+PYC0174,Manav Chandra,staff0174@pycareer.com,employee,Finance & Operations,Payroll Associate,2025-09-07,PYC0009,active
+PYC0175,Sahil Kapoor,staff0175@pycareer.com,employee,Recruitment,Employer Partnerships Associate,2023-08-25,PYC0007,active
+PYC0176,Aditi Reddy,staff0176@pycareer.com,employee,Data & Analytics,BI Analyst,2026-08-05,PYC0004,active
+PYC0177,Ishaan Chandra,staff0177@pycareer.com,employee,Finance & Operations,Payroll Associate,2024-03-10,PYC0009,active
+PYC0178,Pranav Kapoor,staff0178@pycareer.com,employee,Career Services,Student Success Associate,2022-03-19,PYC0006,active
+PYC0179,Varun Rao,staff0179@pycareer.com,employee,Engineering,Senior Python Developer,2022-05-21,PYC0002,active
+PYC0180,Avni Bhat,staff0180@pycareer.com,employee,Learning & Content,Python Trainer,2021-05-19,PYC0008,active
+PYC0181,Meera Joshi,staff0181@pycareer.com,employee,Product & Design,UX Designer,2023-02-04,PYC0005,active
+PYC0182,Sanjana Pillai,staff0182@pycareer.com,employee,Engineering,Software Engineer,2022-07-04,PYC0002,active
+PYC0183,Aditya Verma,staff0183@pycareer.com,employee,Learning & Content,Content Specialist,2024-03-23,PYC0008,active
+PYC0184,Kabir Jain,staff0184@pycareer.com,employee,Product & Design,Product Analyst,2023-09-26,PYC0005,active
+PYC0185,Priya Patel,staff0185@pycareer.com,employee,People & Culture,HR Executive,2021-02-12,PYC0001,active
+PYC0186,Vedika Srinivasan,staff0186@pycareer.com,employee,Recruitment,Recruiter,2025-05-26,PYC0007,active
+PYC0187,Dev Jain,staff0187@pycareer.com,employee,Data & Analytics,BI Analyst,2022-01-07,PYC0004,active
+PYC0188,Mihir Patel,staff0188@pycareer.com,employee,Finance & Operations,Payroll Associate,2023-04-03,PYC0009,active
+PYC0189,Sanya Srinivasan,staff0189@pycareer.com,employee,Recruitment,Recruiter,2026-02-24,PYC0007,active
+PYC0190,Akash Iyer,staff0190@pycareer.com,employee,Data & Analytics,BI Analyst,2023-05-03,PYC0004,probation
+PYC0191,Kavya Nair,staff0191@pycareer.com,employee,Finance & Operations,Finance Analyst,2021-02-13,PYC0009,active
+PYC0192,Rhea Singh,staff0192@pycareer.com,employee,Career Services,Student Success Associate,2023-02-10,PYC0006,active
+PYC0193,Vihaan Gupta,staff0193@pycareer.com,employee,Engineering,Backend Developer,2021-04-02,PYC0002,active
+PYC0194,Diya Mehta,staff0194@pycareer.com,employee,Learning & Content,Curriculum Developer,2023-08-02,PYC0008,active
+PYC0195,Naina Sharma,staff0195@pycareer.com,employee,Product & Design,UI Designer,2024-03-25,PYC0005,active
+PYC0196,Shaurya Ghosh,staff0196@pycareer.com,employee,Engineering,DevOps Engineer,2026-05-19,PYC0002,active
+PYC0197,Ananya Menon,staff0197@pycareer.com,employee,Learning & Content,Curriculum Developer,2021-04-23,PYC0008,active
+PYC0198,Kiran Sharma,staff0198@pycareer.com,employee,Product & Design,Product Owner,2024-08-24,PYC0005,active
+PYC0199,Rohan Ghosh,staff0199@pycareer.com,employee,People & Culture,People Operations Associate,2024-02-09,PYC0001,active
+PYC0200,Yash Menon,staff0200@pycareer.com,employee,Recruitment,Recruiter,2024-01-05,PYC0007,active
