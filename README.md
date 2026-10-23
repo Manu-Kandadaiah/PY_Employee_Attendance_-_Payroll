@@ -1,162 +1,134 @@
-# PyCareer | Employee Attendance & Payroll Management
+PyCareer — Employee Attendance & Payroll Management System
+A role-based HR operations web application built with Python, Flask, SQLite, Bootstrap 5 and Chart.js.
 
-**Flask • SQLAlchemy • SQLite • Bootstrap 5 • Chart.js • Python • HR technology**
+Tech stack: Python · Flask · SQLAlchemy · SQLite · Flask-Login · Bootstrap 5 · Chart.js · ReportLab
+Portfolio disclosure: PyCareer is the demonstration brand. All employee records, email addresses, attendance history and payroll examples are fictional. This repository does not publish actual employee data or prove statutory payroll compliance. The project is intended for learning and portfolio demonstration, not live salary disbursement.
 
-A responsive, role-based workforce operations application redesigned as a **PyCareer portfolio project**. It demonstrates employee attendance tracking, leave approval, shift scheduling, salary structures, payroll generation and protected payslip workflows.
+Project at a glance
+PyCareer Employee Attendance & Payroll Management brings common HR workflows into one browser-based interface. Administrators, HR personnel, managers and employees receive role-specific functionality to handle attendance, leave requests, employee records, shift schedules and payroll information.
 
-> **Portfolio disclosure:** All 200 employee profiles, email addresses, attendance records and payroll examples are **fictional**. This repository does not contain real personnel data. PyCareer is the demonstration brand. The application is a local learning/portfolio project, not a certified payroll system.
+The redesigned application uses a responsive interface with a PyCareer logo, sign-in screen, dashboards, data tables and charts. A repeatable demo seeding process is designed to populate a 200-employee dataset so reviewers can explore realistic workflows without using confidential information.
+Area	What the project demonstrates
+Employee management	Employee directory, departments and reporting relationships
+Attendance	Check-in/check-out tracking and attendance records
+Leave & overtime	Leave requests, leave balances and approval workflows
+Scheduling	Shifts and employee shift assignments
+Payroll	Salary structures, generated payroll periods and employee payroll entries
+Payslips	PDF generation with restricted download access
+Reporting	Dashboard indicators, charts and HR views
+Access control	Distinct Administrator, HR, Manager and Employee roles
 
-## Features
 
-| Role | What it can do |
-|---|---|
-| **Administrator** | Account access, roles, department directory and audit activity |
-| **HR** | Employee records, shift schedules, leave policies, payroll periods and reports |
-| **Manager** | Team attendance, leave/overtime approvals and shift assignment |
-| **Employee** | Check in/out, request leave, track attendance and view own payslips |
+Demo data
+The project includes [`data/pycareer_demo_employees_200.csv`](data/pycareer_demo_employees_200.csv), a 200-row fictional employee preview with unique employee codes and addresses using the non-deliverable @pycareer.example domain.
 
-Additional capabilities include CSRF protection for form submissions, hashed passwords, role-based routes, protected payslip downloads, PDF generation and searchable employee tables.
+The seed-demo command is designed to create related records in a local SQLite database:
+Record type	Expected initial demo count
+Departments	8
+Employee profiles	200
+Application users	201 (200 employee-linked users + 1 administrator)
+Shift assignments	200
+Salary structures	200
+Leave balances	800
+Sample payroll entries	200
 
-## Updated UI
 
-- Distinctive PyCareer SVG logo and favicon
-- Navy, indigo and teal design with responsive navigation
-- Redesigned two-column sign-in page and consistent dashboard cards
-- Readable tables, status indicators, forms and chart presentation
-- Mobile/tablet layout adjustments
-
-Brand assets: `app/static/img/logo.svg`, `app/static/img/favicon.svg`, `app/static/css/app.css`.
-
-## Demo dataset
-
-The repository also includes a safe, reviewable [`data/pycareer_demo_employees_200_com.csv`](data/pycareer_demo_employees_200_com.csv) preview with exactly 200 fictional employee records. Run the seed command to create **200 fictional employee profiles across eight departments**, 201 users (one administrator plus employee accounts), salary structures and shift assignments, leave balances, generated attendance records, and a **200-entry previous-month payroll preview**. The sample payroll period remains `generated`, not approved or marked paid. See [`docs/DATA_DICTIONARY.md`](docs/DATA_DICTIONARY.md) for full counts and relationships.
-
-Demo email addresses use the reserved `@pycareer.com` domain and **will not receive actual email**. They are placeholders for local authentication only.
-
-## Requirements
-
-- Python **3.12** recommended; Windows / PyCharm or VS Code
-- No Docker server or MySQL server required
-- Internet access for initial Python package installation and Bootstrap/Chart.js CDN assets
-
-## Setup: Windows / PyCharm
-
-1. Extract the ZIP and open the folder in PyCharm.
-2. Open the terminal at project root and create your environment:
-
-```powershell
+The example payroll is generated for the previous month and remains in generated status—it is not approved or paid. Attendance counts depend on the date when the seed runs. For details, see [`docs/DATA_DICTIONARY.md`](docs/DATA_DICTIONARY.md).
+User roles
+- Administrator: user access, role management, departments and audit activity.
+- HR: employee records, scheduling, leave policies, payroll periods and reports.
+- Manager: team attendance, leave/overtime approvals and shift assignments.
+- Employee: attendance check-in/out, leave requests and access to their own payslips.
+Interface and security design
+- Responsive layout with custom PyCareer SVG logo, favicon and CSS theme.
+- Role-protected Flask routes and authenticated sessions.
+- Password hashing, CSRF protection for HTML forms and restricted payslip access.
+- Searchable tables, status indicators and dashboard charts.
+- Secrets configured locally through .env, which is excluded from Git.
+Security limitation: This is a demonstration system. The included protections are not a substitute for penetration testing, production security configuration, or an independent payroll/legal review.
+Run locally using PyCharm (Windows)
+Prerequisites: Python 3.12, PyCharm or VS Code, and internet access to install Python packages. Docker and MySQL are not required.
+1. Clone and install
+git clone https://github.com/YOUR_USERNAME/pycareer-employee-attendance-payroll.git
+cd pycareer-employee-attendance-payroll
 py -3.12 -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
-```
-
-3. Copy configuration:
-
-```powershell
+Replace YOUR_USERNAME with your GitHub username. If you downloaded the project ZIP instead, open its extracted root folder and skip the clone commands.
+2. Configure your environment
 Copy-Item .env.example .env
 python -c "import secrets; print(secrets.token_urlsafe(48))"
-```
-
-4. Edit `.env`, replacing `SECRET_KEY` with the generated random string and setting a **private `DEMO_PASSWORD` with at least 12 characters**. Keep both values outside GitHub.
-5. Initialize SQLite and insert the demonstration dataset:
-
-```powershell
+Edit .env and set:
+- SECRET_KEY to the newly generated random string.
+- DEMO_PASSWORD to a private password containing at least 12 characters.
+- DATABASE_URL to the included default sqlite:///pycareer_payroll.db unless you have a specific reason to change it.
+Never commit .env or publish the demo password.
+3. Initialize and seed SQLite
 python -m flask --app run.py init-db
 python -m flask --app run.py seed-demo
 python scripts/verify_demo.py
-```
-
-6. Start the application:
-
-```powershell
+The verification script checks the expected employee count and related database records. The database file is created locally under instance/ and is ignored by Git.
+4. Start the web application
 python run.py
-```
+Open http://127.0.0.1:5000/auth/login.
+Demo role	Login email
+Administrator	admin@pycareer.example
+HR	hr@pycareer.example
+Manager	manager@pycareer.example
+Employee	employee@pycareer.example
 
-7. Visit **http://127.0.0.1:5000/auth/login**.
 
-The default database URI is `sqlite:///pycareer_payroll.db` (Flask stores it under `instance/`). This file is created automatically and excluded from Git.
-
-### Local demonstration logins
-
-All four roles use the **private** password configured in your `.env` (`DEMO_PASSWORD`).
-
-| Role | Local demo email |
-|---|---|
-| Admin | `admin@pycareer.com` |
-| HR | `hr@pycareer.com` |
-| Manager | `manager@pycareer.com` |
-| Employee | `employee@pycareer.com` |
-
-> These `.com` email addresses are fictional placeholders. Do not send live mail to them. Never publish or reuse the demo password in a live environment.
-
-To start with a **fresh demo database**, stop the server, delete only your local `instance/pycareer_payroll.db` (this permanently erases local records), and rerun initialization and seeding. The seed command is idempotent for a previously seeded database and refuses to overwrite pre-existing users.
-
-## Verify and test
-
-```powershell
+These role accounts use the private DEMO_PASSWORD configured in your .env. The .example domain is reserved for documentation and does not deliver real email.
+Tests and verification
+Run locally after installing dependencies:
 python scripts/verify_demo.py
 python -m pytest -v
-```
-
-`verify_demo.py` validates the expected 200 employee profiles, linked records, and SQLite foreign keys. Automated test modules are under `tests/`.
-
-**Verification status:** Python syntax and Jinja template parsing have been checked during this packaging. The complete Flask runtime/pytest suite has **not** been executed here because Flask dependencies were not available in the packaging runtime. Run the commands above after installing requirements.
-
-## Repository structure
-
-```text
-employee-attendance-payroll/
+Verification performed when this portfolio package was prepared:
+- Python syntax parsing for 50 source/test files.
+- Jinja parsing for 34 templates.
+- Validation of 200 demo CSV rows, unique employee IDs/emails, eight departments and manager references.
+- ZIP integrity and inspection of the SQLite configuration.
+Not yet verified in the packaging environment: Complete Flask startup, database seeding through the ORM, full pytest execution, end-to-end payroll generation and interactive browser workflows. Dependency installation was unavailable in that environment. See [`VERIFICATION_REPORT.md`](VERIFICATION_REPORT.md) for the exact test limitations.
+Repository structure
+PyCareer_Employee_Attendance_Payroll/
 ├── app/
-│   ├── blueprints/           # auth, admin, HR, employee, manager, API
-│   ├── forms/                # WTForms validation
-│   ├── models/               # linked relational data models
-│   ├── services/             # attendance, payroll, PDF, reporting
-│   ├── templates/            # responsive Jinja HTML views
-│   ├── static/css/app.css    # PyCareer UI theme
-│   └── static/img/           # logo and favicon
-├── data/pycareer_demo_employees_200_com.csv
-├── scripts/verify_demo.py    # dataset/referential integrity checker
-├── tests/                    # Flask app tests
-├── docs/DATA_DICTIONARY.md
+│   ├── blueprints/            # Role-based web routes and API
+│   ├── forms/                 # Input validation
+│   ├── models/                # Database models and relationships
+│   ├── services/              # Attendance, leave, payroll and PDF logic
+│   ├── templates/             # Jinja pages and role dashboards
+│   └── static/                # PyCareer CSS, logo and favicon
+├── data/
+│   └── pycareer_demo_employees_200.csv
+├── docs/                     # Architecture, API and data dictionary
+├── scripts/verify_demo.py    # Demo integrity verification
+├── tests/                    # Automated test cases
 ├── config.py
 ├── run.py
 ├── requirements.txt
 ├── .env.example
 ├── .gitignore
+├── SECURITY.md
 └── README.md
-```
-
-## GitHub instructions
-
-Create a new **empty** repository named `pycareer-employee-attendance-payroll`. From the extracted project root:
-
-```powershell
+Recruiter quick tour
+1. Explore the interface: Run the application and sign in as HR or an employee to view role-specific pages.
+2. Review the dataset: Open [`data/pycareer_demo_employees_200.csv`](data/pycareer_demo_employees_200.csv) to inspect the fictional employee records.
+3. Read the backend: Inspect app/blueprints/, app/models/ and app/services/ for the Flask and database implementation.
+4. Review verification: See tests/ and VERIFICATION_REPORT.md for what is included versus what has been executed.
+5. Understand design decisions: Browse docs/ARCHITECTURE.md, docs/API.md and docs/DATA_DICTIONARY.md.
+Upload to GitHub
+Create an empty repository named pycareer-employee-attendance-payroll. In the project folder, run:
 git init
 git add .
 git status
-git commit -m "Build PyCareer employee attendance and payroll app"
+git commit -m "Add PyCareer attendance and payroll portfolio project"
 git branch -M main
 git remote add origin https://github.com/YOUR_USERNAME/pycareer-employee-attendance-payroll.git
 git push -u origin main
-```
-
-Replace `YOUR_USERNAME`. Confirm that `.env`, virtual environments, generated payslips and SQLite files are absent from `git status` before committing. No GitHub upload is performed by this package.
-
-## Security and business limitations
-
-- Demo users and passwords are for **local access only**; do not expose this version to the public internet.
-- The app uses simple illustrative PF, tax, salary and leave computations; **real payroll requires legal, tax and HR review**.
-- SQLite is appropriate for local demonstration, not high-concurrency enterprise payroll.
-- Production rollout would need verified migrations, hardened login/rate limiting and cookies, backup/restore procedures, access audits, and a thorough security review.
-- Employee names, attendance, emails and salary figures are synthetic. Avoid presenting them as actual staff or financial results.
-
-## CSV filename and database behavior
-
-The preview CSV is `data/pycareer_demo_employees_200_com.csv`. The current `seed-demo` command generates 200 demo employees from Python logic in `app/cli.py`; it does **not** import rows from the CSV. Editing the CSV alone does not update SQLite. The seed command now uses fictional `@pycareer.com` login addresses. To regenerate a fresh local demo database, stop the app, back up any data you want, delete only the local `instance/pycareer_payroll.db`, then run `init-db` and `seed-demo`.
-
-For a differently named CSV, change references in documentation or your own import code. There is no CSV filename setting in `config.py` for this application.
-
-
-## Raw data upload and automatic chart reporting
-
-Admin/HR can upload CSV or Excel files at `/analytics/` to clean data and generate downloadable charts and reports. See [ANALYTICS_GUIDE.md](ANALYTICS_GUIDE.md). This does not import into the payroll database.
+Upload: source code, templates, static assets, requirements, .env.example, fictional CSV, tests and documentation. Do not upload: .env, instance/, SQLite databases, virtual environments, uploaded payslips, caches, secrets or real HR/payroll information.
+Limitations and next steps
+- Payroll calculations are illustrative; legal, tax, PF, leave and statutory rules require professional review before real use.
+- The SQLite configuration is suited to local portfolio demonstration rather than high-concurrency payroll operations.
+- Production deployment would require validated migrations, hardened authentication/cookies, backups, audit reviews and security testing.
+- Add authentic dashboard screenshots only after running and capturing the actual application—do not substitute mockups or claim an unverified deployment.
+Portfolio focus: Full-stack Python development · Flask · Relational databases · HR workflow automation · Role-based dashboards · Documentation and testing.
